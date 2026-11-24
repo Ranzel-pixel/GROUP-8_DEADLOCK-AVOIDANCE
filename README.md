@@ -473,14 +473,6 @@ Before the demo: run `python test_banker.py` on the presenting laptop and keep a
 - Dijkstra, E. W. *Een algorithme ter voorkoming van de dodelijke omarming* (EWD108). The original Banker's Algorithm.
 - Python Software Foundation. *Python 3 Documentation*: `unittest`. https://docs.python.org/3/library/unittest.html
 - PT 101 Final Project Guidelines, BatStateU CICS, AY 2026-2027.
-
-## 12. Assistance disclosure
-
-| Tool / source | What it was used for | Reviewed by the group? |
-|---|---|---|
-| Claude (AI assistant by Anthropic) | Drafting and correcting this README, writing `test_banker.py`, `docs/TEST_CASES.md`, `docs/CONTRIBUTIONS.md` (template), `docs/DEMO_SCRIPT.md` and `.gitignore`, and running the program to save `test_evidence/` | **Group to confirm** |
-| Silberschatz et al., *Operating System Concepts* | Algorithm definitions and the textbook sample data | Yes |
-
 **Group to confirm before submitting:** if any other tool, AI assistant, tutorial or classmate helped with `BANKERS_ALGO-GROUP-8.py` or anything else, add a row above. Follow your instructor's policy on AI use.
 
 Statement: all members have read the code and documents in this repository and can explain them during the oral defense.
