@@ -113,8 +113,7 @@ The guidelines say the group leader assigns tasks, monitors progress, and makes 
 | Name | Role | Main tasks |
 |---|---|---|
 | HIDALGO, PERSHEY RANZEL JAMINA | Leader | Assigned tasks and monitored the group's progress; wrote the program (banker.py): safety algorithm, resource-request algorithm, input validation, menu and output; wrote the automated tests (test_banker.py); runs the live demo. |
-| BATHAN, EMMANUEL | Member | Set up and manages the GitHub repository; uploaded and organized the project files; added members as collaborators; presents the resource request examples in the demo.
- |
+| BATHAN, EMMANUEL | Member | Set up and manages the GitHub repository; uploaded and organized the project files; added members as collaborators; presents the resource request examples in the demo.|
 | ABANTE, SER JAMES | Member | Prepares the presentation slides (group names, repository link); tests the slides on the projector and keeps a PDF backup; opens and closes the presentation. |
 | GUIZZAGAN, CHRISTIAN | Member | Runs the 8 test cases on his own laptop and takes screenshots as testing evidence; checks expected vs actual results in the test document; presents the formulas and testing results. |
 
