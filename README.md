@@ -47,11 +47,10 @@ All results are computed by the program from the inputs. Nothing is hard-coded.
 
 | Name | Role | Main tasks |
 |---|---|---|
-| | Leader | |
-| | | |
-| | | |
-| | | |
-| | | |
+| HIDALGO, PERSHEY RANZEL JAMINA | Leader | |
+| BATHAN, EMMANUEL | Member | |
+| ABANTE, SER JAMES | Member | |
+| GUIZZAGAN, CHRISTIAN | Member | |
 
 Full task record: [`docs/CONTRIBUTIONS.md`](docs/CONTRIBUTIONS.md)
 
