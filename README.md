@@ -1,10 +1,10 @@
 # Banker's Algorithm Simulator (Deadlock Avoidance)
 
-**PT 101 - Platform Technologies | Final Project | Topic 5**
+**PT 101 - Platform Technologies | Final Project | Topic 5: Deadlock Avoidance - Banker's Algorithm**
 Batangas State University, College of Informatics and Computing Sciences, Alangilan Campus
-1st Semester AY 2026-2027
+Information Technology Department | 1st Semester AY 2026-2027
 
-A Python console program that simulates the **Banker's Safety Algorithm** and the **Resource-Request Algorithm**. Every computation is shown step by step: Need, Available, each Work comparison and update, the Finish flags, and the safe sequence (or UNSAFE STATE). For requests it shows Request <= Need, Request <= Available, the tentative state, the safety result and the GRANT / WAIT decision.
+A Python console program that simulates the **Banker's Safety Algorithm** (required) and the **Resource-Request Algorithm** (the extension named in the guidelines). Every computation is shown step by step: Total, Allocation, Max, Need, Available, each Work comparison and update, the Finish flags, and the safe sequence (or UNSAFE STATE). For requests it shows Request <= Need, Request <= Available, the tentative state, the safety result and the GRANT / WAIT decision.
 
 All results are computed by the program from the inputs. Nothing is hard-coded.
 
@@ -15,19 +15,21 @@ All results are computed by the program from the inputs. Nothing is hard-coded.
 | Item | Details |
 |---|---|
 | Course | PT 101 - Platform Technologies |
-| Project | Final Project, Topic 5: Banker's Algorithm Simulator (Deadlock Avoidance) |
-| Group | Group 8 |
-| School / College | Batangas State University, College of Informatics and Computing Sciences, Alangilan Campus |
+| Project | Final Project, Topic 5: Deadlock Avoidance - Banker's Algorithm |
+| Group | Group 8 (4 members) |
+| Department / College | Information Technology Department, College of Informatics and Computing Sciences |
+| School | Batangas State University, The National Engineering University, Alangilan Campus |
 | Term | 1st Semester, AY 2026-2027 |
 | Repository | https://github.com/Ranzel-pixel/GROUP-8_DEADLOCK-AVOIDANCE |
 | Program file | [`BANKERS_ALGO-GROUP-8.py`](BANKERS_ALGO-GROUP-8.py) |
-| Language | Python 3.8+ (standard library only) |
+| Language | Python 3.8+ (standard library only). Allowed by the guidelines: Java, C++ or Python. |
 
 ---
 
 ## Contents
 
 - [Features](#features)
+- [Project requirements and how this project meets them](#project-requirements-and-how-this-project-meets-them)
 - [Deliverables checklist](#deliverables-checklist)
 - [Group members](#group-members)
 - [Repository structure](#repository-structure)
@@ -42,7 +44,6 @@ All results are computed by the program from the inputs. Nothing is hard-coded.
 - [9. Troubleshooting](#9-troubleshooting)
 - [10. Assumptions and limitations](#10-assumptions-and-limitations)
 - [11. References](#11-references)
-- [12. Assistance disclosure](#12-assistance-disclosure)
 
 ---
 
@@ -53,24 +54,61 @@ All results are computed by the program from the inputs. Nothing is hard-coded.
 - Computes Need and Available from your inputs. You never type them.
 - Three ready-made sample data sets, or enter your own system (1 to 20 processes, 1 to 10 resource types).
 - Input validation: bad input shows a message and asks again instead of crashing.
-- The algorithm code is separate from input and output, so it is covered by automated tests.
+- The algorithm code is separate from input and output, which keeps the code organized.
 - No external libraries. Runs on Windows, macOS and Linux.
+
+---
+
+## Project requirements and how this project meets them
+
+The PT 101 Final Project Guidelines (AY 2026-2027) ask for the following for **Topic 5**.
+
+### What the guidelines require for Topic 5
+
+| Guideline item | How this project meets it |
+|---|---|
+| **Required:** Banker's Safety Algorithm | Option 4, `safety_algorithm()` ([section 5](#5-the-algorithms)) |
+| Resource-request checking (extension) | Option 5, `resource_request()`: Request <= Need, Request <= Available, tentative state, safety result, GRANT / WAIT (plus ERROR when Request > Need) |
+| **Input:** process count, resource types, Total vector, Allocation matrix, Max matrix, optional requesting process and Request vector | Options 1 and 5 ([section 3](#3-inputs)) |
+| **Processing:** Need = Max - Allocation; Available = Total - column sums of Allocation; Work = Available; Finish = False; find unfinished process with Need <= Work (component-wise); Work = Work + Allocation; Finish = True; repeat | `compute_need`, `compute_available`, `safety_algorithm`, `vec_leq` ([section 7](#7-code-structure)) |
+| **Output:** Total, Allocation, Max, Need, Available; each Work comparison and update; Finish flags; safe sequence or UNSAFE STATE | Options 3 and 4 ([section 4](#4-reading-the-output)) |
+| **Output for requests:** Request <= Need, Request <= Available, tentative state, safety result, GRANT / WAIT | Option 5 ([section 4](#4-reading-the-output)) |
+| Hard-coded sample outputs are **not** acceptable | The three sample data sets are **inputs only**. All results are computed. To check, use option 1 and type any other inputs. |
+| Allowed languages: Java, C++ or Python | Python 3.8+ |
+| Group of four (4) to five (5) members | 4 members ([Group members](#group-members)) |
+| Use only the assigned topic. Do not copy another group's program. Cite resources. | [References](#11-references) |
+
+### How this project covers the grading rubric
+
+| Rubric criterion | Points | Where this project addresses it |
+|---|---|---|
+| Algorithm correctness and computation | 20 | Intermediate trace of every pass. 8 test cases checked against hand computations ([section 6](#6-testing)) |
+| Output clarity and usability | 15 | Aligned tables, labeled vectors (A, B, C and P0, P1 ...), YES / NO on every comparison ([section 4](#4-reading-the-output)) |
+| Code structure and organization | 10 | 7 commented sections, algorithms separate from input and output ([section 7](#7-code-structure)), this user guide and [references](#11-references) |
+| User interface | 5 | Numbered menu, input validation that asks again instead of crashing ([sections 2 and 3](#2-how-to-run)) |
+| Verified contribution (individual) | 20 | GitHub commit history and the contribution record in the instructor's spreadsheet |
+| Individual oral defense (individual) | 20 | [Section 8](#8-presentation-and-demo): demo rules, demo flow and how to trace a computation by hand |
+| Professionalism and participation (individual) | 10 | Every member contributes commits and joins the demo |
 
 ---
 
 ## Deliverables checklist
 
+The five deliverables listed in the project guidelines:
+
 | # | Deliverable (from the project guidelines) | Where to find it | Status |
 |---|---|---|---|
-| 1 | Complete, organized source code (GitHub repository) | [`BANKERS_ALGO-GROUP-8.py`](BANKERS_ALGO-GROUP-8.py), [`test_banker.py`](test_banker.py), this repository | Done |
-| 2 | User guide: execution, inputs, output interpretation | This README, sections [2](#2-how-to-run), [3](#3-inputs) and [4](#4-reading-the-output) | Done |
-| 3 | Testing evidence: at least 3 test cases, expected vs actual | [`docs/TEST_CASES.md`](docs/TEST_CASES.md) (8 cases) and [`test_evidence/`](test_evidence/) | Done |
-| 4 | Contribution record in the instructor's Google Spreadsheet | Fill in the table in [`docs/CONTRIBUTIONS.md`](docs/CONTRIBUTIONS.md), then copy it into the instructor's sheet | **Group to fill in** |
-| 5 | Demo / presentation materials | [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) is ready. Slides: **group to add** to `docs/presentation/` | Script done, slides pending |
+| 1 | Complete, organized source code (GitHub repository) | [`BANKERS_ALGO-GROUP-8.py`](BANKERS_ALGO-GROUP-8.py), this repository | Done |
+| 2 | User guide describing execution, inputs, and output interpretation | This README, sections [2](#2-how-to-run), [3](#3-inputs) and [4](#4-reading-the-output) | Done |
+| 3 | Testing evidence: at least three test cases with expected and actual results | [Section 6](#6-testing) of this README (8 cases, expected vs actual) | Done |
+| 4 | Contribution record in the instructor-provided Google Spreadsheet | Fill in the group's rows **directly in the instructor's spreadsheet**. | **Group to fill in** |
+| 5 | Demo / presentation materials for the actual presentation | [Section 8](#8-presentation-and-demo) of this README (demo rules, demo flow, how to trace by hand) | Done |
 
 ---
 
 ## Group members
+
+The guidelines say the group leader assigns tasks, monitors progress, and makes sure every member takes part.
 
 | Name | Role | Main tasks |
 |---|---|---|
@@ -79,7 +117,7 @@ All results are computed by the program from the inputs. Nothing is hard-coded.
 | ABANTE, SER JAMES | Member | *(fill in)* |
 | GUIZZAGAN, CHRISTIAN | Member | *(fill in)* |
 
-Full task record: [`docs/CONTRIBUTIONS.md`](docs/CONTRIBUTIONS.md)
+Keep this table the same as the instructor's spreadsheet.
 
 ---
 
@@ -88,23 +126,8 @@ Full task record: [`docs/CONTRIBUTIONS.md`](docs/CONTRIBUTIONS.md)
 ```
 GROUP-8_DEADLOCK-AVOIDANCE/
 ├── BANKERS_ALGO-GROUP-8.py    # the program (run this)
-├── test_banker.py             # automated test cases
-├── README.md                  # user guide (this file)
-├── .gitignore
-├── docs/
-│   ├── TEST_CASES.md          # test cases: expected vs actual results
-│   ├── CONTRIBUTIONS.md       # contribution record
-│   └── DEMO_SCRIPT.md         # demo flow and oral defense review
-└── test_evidence/             # saved program output for every test case
-    ├── TC1_safe_state.txt
-    ├── TC2_unsafe_state.txt
-    ├── TC3_to_TC6_requests.txt
-    ├── TC7_four_resource_types.txt
-    ├── TC8_invalid_inputs.txt
-    └── automated_tests_output.txt
+└── README.md                  # user guide and test report (this file)
 ```
-
-Slides (`docs/presentation/`) will be added by the group when they are ready.
 
 ---
 
@@ -132,14 +155,6 @@ python --version
    ```
    If `python` is not found, try `py BANKERS_ALGO-GROUP-8.py` (Windows) or `python3 BANKERS_ALGO-GROUP-8.py` (macOS/Linux).
 4. Choose options from the menu by typing the number and pressing Enter. After each option the program waits for Enter before showing the menu again.
-
-To run the automated tests:
-
-```
-python test_banker.py
-```
-
-The last lines should be `Ran 16 tests` and `OK`.
 
 The main menu looks like this:
 
@@ -281,8 +296,6 @@ Final Finish flags: P0=T P1=T P2=T P3=T P4=T
 ----------------------------------------------------------------
 ```
 
-The full output is saved in [`test_evidence/TC1_safe_state.txt`](test_evidence/TC1_safe_state.txt).
-
 | Output line | Meaning |
 |---|---|
 | `Step 1: Work = Available = [..]` | Work starts as a copy of Available. All Finish flags start as F. |
@@ -331,8 +344,6 @@ Check 2: Request [0 2 0] <= Available [2 3 0] ?  YES
  The system state was NOT changed.
 ```
 
-The full output of both is saved in [`test_evidence/TC3_to_TC6_requests.txt`](test_evidence/TC3_to_TC6_requests.txt).
-
 | Output | Meaning | Decision |
 |---|---|---|
 | `Check 1: Request <= Need ?  NO` | The process asked for more than its declared maximum. | **ERROR** (rejected) |
@@ -367,29 +378,223 @@ After a **GRANT**, later options use the updated state. After **WAIT** or **ERRO
 - Work goes [3 3 2] → [5 3 2] (P1) → [7 4 3] (P3) → [7 4 5] (P4) → [7 5 5] (P0) → [10 5 7] (P2).
 - **SAFE**, safe sequence **< P1, P3, P4, P0, P2 >**. The final Work equals Total, which is a good self-check.
 
-Full hand computation: [`docs/TEST_CASES.md`](docs/TEST_CASES.md#tc1-hand-computation-safety-algorithm).
+Full hand computation: [section 6, TC1](#tc1-hand-computation-safety-algorithm).
 
 ---
 
 ## 6. Testing
 
-8 test cases were run on the live program, and 16 automated tests check the same behavior. **All passed.**
+This section is the testing evidence (deliverable 3): **8 test cases**, each with its input, the expected result worked out by hand, and the actual result printed by the program. All 8 passed.
 
-| TC | What is tested | Expected | Actual | Status |
+### Summary
+
+| TC | What is tested | Input | Expected | Actual | Status |
+|---|---|---|---|---|---|
+| 1 | Safe state | Option 2, data set 1, then option 4 | SAFE, < P1, P3, P4, P0, P2 > | SAFE, < P1, P3, P4, P0, P2 > | PASS |
+| 2 | Unsafe state | Option 2, data set 2, then option 4 | UNSAFE STATE | UNSAFE STATE | PASS |
+| 3 | Request that keeps the system safe | Data set 1, P1 requests `1 0 2` | GRANT | GRANT | PASS |
+| 4 | Request that makes the system unsafe | Then P0 requests `0 2 0` | WAIT (unsafe) | WAIT (unsafe) | PASS |
+| 5 | Request more than Available | Then P4 requests `3 3 0` | WAIT (not available) | WAIT (not available) | PASS |
+| 6 | Request more than Need | Then P0 requests `8 0 0` | ERROR (exceeds Need) | ERROR (exceeds Need) | PASS |
+| 7 | 4 resource types and a request | Data set 3, safety, then P1 requests `0 0 1 0` | SAFE < P0, P2, P3, P4, P1 >, GRANT | Same | PASS |
+| 8 | Invalid inputs | Option 1 and option 5 with bad values | Each bad value rejected with a message, no crash | Same | PASS |
+
+TC3 to TC6 are one continuous session. Each request runs on the state left by the one before it. Only a GRANT changes the state, so TC4, TC5 and TC6 all run on the state after TC3.
+
+### TC1 Hand computation: Safety Algorithm
+
+**Input (sample data set 1):** 5 processes, 3 resource types, Total = [10 5 7]
+
+| Process | Allocation | Max | Need = Max - Allocation |
+|---|---|---|---|
+| P0 | 0 1 0 | 7 5 3 | 7 4 3 |
+| P1 | 2 0 0 | 3 2 2 | 1 2 2 |
+| P2 | 3 0 2 | 9 0 2 | 6 0 0 |
+| P3 | 2 1 1 | 2 2 2 | 0 1 1 |
+| P4 | 0 0 2 | 4 3 3 | 4 3 1 |
+
+Column sums of Allocation = [7 2 5], so **Available = [10 5 7] - [7 2 5] = [3 3 2]**.
+
+| Step | Process checked | Need <= Work? | Work after |
+|---|---|---|---|
+| Start | | | [3 3 2] |
+| Pass 1 | P0: [7 4 3] <= [3 3 2] | NO (7 > 3) | |
+| | P1: [1 2 2] <= [3 3 2] | YES | [3 3 2] + [2 0 0] = [5 3 2] |
+| | P2: [6 0 0] <= [5 3 2] | NO (6 > 5) | |
+| | P3: [0 1 1] <= [5 3 2] | YES | [5 3 2] + [2 1 1] = [7 4 3] |
+| | P4: [4 3 1] <= [7 4 3] | YES | [7 4 3] + [0 0 2] = [7 4 5] |
+| Pass 2 | P0: [7 4 3] <= [7 4 5] | YES | [7 4 5] + [0 1 0] = [7 5 5] |
+| | P2: [6 0 0] <= [7 5 5] | YES | [7 5 5] + [3 0 2] = [10 5 7] |
+
+All Finish flags are True. **Expected: SAFE, safe sequence < P1, P3, P4, P0, P2 >.** Self-check: the final Work [10 5 7] equals Total.
+
+**Actual (program output):**
+
+```
+ RESULT: SAFE STATE
+ Safe sequence: < P1, P3, P4, P0, P2 >
+```
+
+**Status: PASS.** (The full trace is shown in section 4.)
+
+### TC2 Unsafe state
+
+**Input (sample data set 2):** Total = [10 5 7]. Allocation is the same as data set 1 except P0 = [0 3 0] and P1 = [3 0 2]. Max is the same as data set 1.
+
+Column sums of Allocation = [8 4 7], so **Available = [2 1 0]**. Needs: P0 [7 2 3], P1 [0 2 0], P2 [6 0 0], P3 [0 1 1], P4 [4 3 1].
+
+Checking each process against Work = [2 1 0]:
+
+- P0: 7 > 2 on A, NO
+- P1: 2 > 1 on B, NO
+- P2: 6 > 2 on A, NO
+- P3: 1 > 0 on C, NO
+- P4: 4 > 2 on A, NO
+
+No process can run, so none finishes. **Expected: UNSAFE STATE.**
+
+**Actual (program output):**
+
+```
+ RESULT: UNSAFE STATE  (possible deadlock)
+ No safe sequence exists for all processes.
+```
+
+**Status: PASS.**
+
+### TC3 Request that is granted
+
+State: data set 1, Available = [3 3 2]. **P1 requests [1 0 2].**
+
+- Check 1: [1 0 2] <= Need(P1) [1 2 2]? YES
+- Check 2: [1 0 2] <= Available [3 3 2]? YES
+- Tentative state: Available = [3 3 2] - [1 0 2] = [2 3 0]. Allocation(P1) = [2 0 0] + [1 0 2] = [3 0 2]. Need(P1) = [1 2 2] - [1 0 2] = [0 2 0].
+- The safety algorithm on the tentative state finds a safe sequence (P1 can finish first because Need [0 2 0] <= Work [2 3 0]).
+
+**Expected: GRANT, state updated.**
+
+**Actual (program output):**
+
+```
+Check 1: Request [1 0 2] <= Need(P1) [1 2 2] ?  YES
+Check 2: Request [1 0 2] <= Available [3 3 2] ?  YES
+ RESULT: SAFE STATE
+ DECISION: GRANT
+ Tentative state is SAFE. Request is granted.
+ The system state has been UPDATED with this allocation.
+```
+
+**Status: PASS.**
+
+### TC4 Request that leads to an unsafe state
+
+State: after TC3, Available = [2 3 0]. **P0 requests [0 2 0].**
+
+- Check 1: [0 2 0] <= Need(P0) [7 4 3]? YES
+- Check 2: [0 2 0] <= Available [2 3 0]? YES
+- Tentative state: Available = [2 1 0]. Needs: P0 [7 2 3], P1 [0 2 0], P2 [6 0 0], P3 [0 1 1], P4 [4 3 1].
+- With Work = [2 1 0], no process has Need <= Work (the same situation as TC2). The tentative state is UNSAFE.
+
+**Expected: WAIT, state not changed.**
+
+**Actual (program output):**
+
+```
+Check 1: Request [0 2 0] <= Need(P0) [7 4 3] ?  YES
+Check 2: Request [0 2 0] <= Available [2 3 0] ?  YES
+ RESULT: UNSAFE STATE  (possible deadlock)
+ DECISION: WAIT
+ Tentative state is UNSAFE. Request is not granted; state is rolled back and the process must wait.
+ The system state was NOT changed.
+```
+
+**Status: PASS.**
+
+### TC5 Request more than Available
+
+State: after TC3, Available = [2 3 0]. **P4 requests [3 3 0].**
+
+- Check 1: [3 3 0] <= Need(P4) [4 3 1]? YES
+- Check 2: [3 3 0] <= Available [2 3 0]? NO (3 > 2 on A)
+
+**Expected: WAIT (not enough free resources). No tentative state is built.**
+
+**Actual (program output):**
+
+```
+Check 1: Request [3 3 0] <= Need(P4) [4 3 1] ?  YES
+Check 2: Request [3 3 0] <= Available [2 3 0] ?  NO
+ DECISION: WAIT
+ Resources are not available right now. Process must wait.
+ The system state was NOT changed.
+```
+
+**Status: PASS.**
+
+### TC6 Request more than Need
+
+State: after TC3. **P0 requests [8 0 0].**
+
+- Check 1: [8 0 0] <= Need(P0) [7 4 3]? NO (8 > 7 on A)
+
+**Expected: ERROR. The process asked for more than its maximum claim.**
+
+**Actual (program output):**
+
+```
+Check 1: Request [8 0 0] <= Need(P0) [7 4 3] ?  NO
+ DECISION: ERROR
+ P0 asked for more than its maximum claim. Request is rejected.
+ The system state was NOT changed.
+```
+
+**Status: PASS.**
+
+### TC7 Four resource types and a request
+
+**Input (sample data set 3):** Total = [3 14 12 12], 5 processes, 4 resource types (A B C D). Available = [1 5 2 0].
+
+Expected safe sequence **< P0, P2, P3, P4, P1 >**. Then **P1 requests [0 0 1 0]:**
+
+- Check 1: [0 0 1 0] <= Need(P1) [0 7 5 0]? YES
+- Check 2: [0 0 1 0] <= Available [1 5 2 0]? YES
+- The tentative state (Available = [1 5 1 0]) is still safe with the same sequence.
+
+**Expected: SAFE < P0, P2, P3, P4, P1 >, then GRANT.**
+
+**Actual (program output):**
+
+```
+ RESULT: SAFE STATE
+ Safe sequence: < P0, P2, P3, P4, P1 >
+Check 1: Request [0 0 1 0] <= Need(P1) [0 7 5 0] ?  YES
+Check 2: Request [0 0 1 0] <= Available [1 5 2 0] ?  YES
+ RESULT: SAFE STATE
+ Safe sequence: < P0, P2, P3, P4, P1 >
+ DECISION: GRANT
+```
+
+**Status: PASS.**
+
+### TC8 Invalid inputs
+
+Typed into option 1 (Enter new system state) and option 5 (Resource Request). After every rejected value the program asked again. It never crashed.
+
+| Prompt | Typed | Expected | Actual message | Status |
 |---|---|---|---|---|
-| 1 | Safe state | SAFE < P1, P3, P4, P0, P2 > | Same | PASS |
-| 2 | Unsafe state | UNSAFE STATE | Same | PASS |
-| 3 | P1 requests [1 0 2] | GRANT | GRANT | PASS |
-| 4 | Then P0 requests [0 2 0] | WAIT (unsafe) | WAIT | PASS |
-| 5 | Then P4 requests [3 3 0] | WAIT (not available) | WAIT | PASS |
-| 6 | Then P0 requests [8 0 0] | ERROR (exceeds Need) | ERROR | PASS |
-| 7 | 4 resource types + request | SAFE < P0, P2, P3, P4, P1 >, GRANT | Same | PASS |
-| 8 | Invalid inputs | Rejected with a message, no crash | Same | PASS |
+| Number of processes | `abc`, `0` | Rejected | `Please enter a whole number from 1 to 20.` | PASS |
+| Number of resource types | `11` | Rejected | `Please enter a whole number from 1 to 10.` | PASS |
+| Allocation row P0 (2 values needed) | `1 x` | Rejected | `Use whole numbers that are 0 or greater only.` | PASS |
+| Allocation row P0 | `1 2 3` | Rejected | `Enter exactly 2 numbers (you entered 3).` | PASS |
+| Allocation row P0 | `-1 0` | Rejected | `Use whole numbers that are 0 or greater only.` | PASS |
+| Allocation P0 `3 0` and P1 `3 0`, Total `5 5` | column sum 6 > 5 | Rejected | `Column sums of Allocation [6 0] exceed Total [5 5]. Please re-enter the Allocation matrix.` | PASS |
+| Max row P0 `0 0` when Allocation is `1 0` | Max < Allocation | Rejected | `Max must be >= Allocation [1 0] for P0.` | PASS |
+| Requesting process number | `9` (only P0, P1 exist) | Rejected | `Please enter a whole number from 0 to 1.` | PASS |
+| Request vector (2 values needed) | `1 2 3` | Rejected | `Enter exactly 2 numbers (you entered 3).` | PASS |
 
-- Inputs, hand computations and full results: [`docs/TEST_CASES.md`](docs/TEST_CASES.md)
-- Saved program output for each case: [`test_evidence/`](test_evidence/)
+### How to reproduce
 
-**How to reproduce:** run `python test_banker.py` for the automated tests, or type the inputs from `docs/TEST_CASES.md` into the live program and compare with the files in `test_evidence/`.
+- **Live:** start `python BANKERS_ALGO-GROUP-8.py` and type the inputs from the tables above. Then compare your screen with the actual output shown for each test case.
 
 ---
 
@@ -407,7 +612,7 @@ Full hand computation: [`docs/TEST_CASES.md`](docs/TEST_CASES.md#tc1-hand-comput
 | 6. Input | `read_line`, `read_int`, `read_vector`, `read_matrix`, `enter_new_state`, `load_preset` | Reads and validates user input |
 | 7. Main menu | `main` | Menu loop |
 
-The algorithm code (section 3) is kept apart from input and output (sections 5 and 6). That is why `test_banker.py` can test the algorithms directly.
+The algorithm code (section 3) is kept apart from input and output (sections 5 and 6). This makes each part easy to read and to test separately.
 
 Key line, the "component-wise" comparison in `vec_leq`:
 
@@ -417,14 +622,17 @@ return all(x <= y for x, y in zip(a, b))
 
 `[1 2 2] <= [3 3 2]` is True because 1<=3, 2<=3 and 2<=2. `[7 4 3] <= [3 3 2]` is False because 7>3.
 
-Note: the program file name has a hyphen, so `test_banker.py` loads it with `importlib` instead of a normal `import`.
-
 ---
 
 ## 8. Presentation and demo
 
-- Demo script, speaking parts and oral defense review: [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md)
-- Slides: to be added by the group in `docs/presentation/`.
+**What the guidelines say about the face-to-face demonstration**
+
+- Each group has **5 to 10 minutes** to explain the problem, inputs, algorithm, computation and outputs.
+- Give a **live run** using sample inputs or inputs chosen by the instructor.
+- **Every member** is asked an individual question about the output, the algorithm or the source code. All members must know the whole project, not only their own part.
+- The instructor may ask a member to **trace a computation** or explain code. Unanswered, incorrect or unclear answers can lead to deductions in the individual oral defense.
+- **Test the program before the presentation** and prepare a **backup copy** of the source code.
 
 Quick demo flow (5 to 10 minutes):
 
@@ -434,7 +642,18 @@ Quick demo flow (5 to 10 minutes):
 4. Option 5 → P0 requests `0 2 0` → UNSAFE → WAIT.
 5. Option 1 → type the instructor's own inputs live.
 
-Before the demo: run `python test_banker.py` on the presenting laptop and keep a backup copy of the code on a USB drive.
+Before the demo: run `python BANKERS_ALGO-GROUP-8.py` once on the presenting laptop (try sample data set 1 and one request) and keep a backup copy of the code (USB drive or a second download of the repository).
+
+**How to trace a computation by hand** (what the instructor may ask you to do)
+
+1. Compute Need for every process: Need = Max - Allocation.
+2. Compute Available: Available = Total - column sums of Allocation.
+3. Set Work = Available and mark every process unfinished.
+4. Go through P0, P1, P2 ... in order. For each unfinished process, compare **every** resource type: is Need <= Work? If yes, Work = Work + Allocation of that process and mark it finished. If no, skip it for now.
+5. Repeat the pass until all processes are finished (SAFE, in the order they finished) or a whole pass finishes nobody (UNSAFE).
+6. For a request: check Request <= Need (else ERROR), check Request <= Available (else WAIT), build the tentative state (Available - Request, Allocation + Request, Need - Request), run steps 3 to 5 on it. SAFE means GRANT, UNSAFE means WAIT.
+
+A fully worked example is in [section 6, TC1](#tc1-hand-computation-safety-algorithm).
 
 ---
 
@@ -471,8 +690,5 @@ Before the demo: run `python test_banker.py` on the presenting laptop and keep a
 
 - Silberschatz, A., Galvin, P. B., & Gagne, G. *Operating System Concepts* (10th ed.). Wiley. Chapter 8: Deadlocks, Section 8.6 Deadlock Avoidance (Banker's Algorithm).
 - Dijkstra, E. W. *Een algorithme ter voorkoming van de dodelijke omarming* (EWD108). The original Banker's Algorithm.
-- Python Software Foundation. *Python 3 Documentation*: `unittest`. https://docs.python.org/3/library/unittest.html
+- Python Software Foundation. *Python 3 Documentation*. https://docs.python.org/3/
 - PT 101 Final Project Guidelines, BatStateU CICS, AY 2026-2027.
-**Group to confirm before submitting:** if any other tool, AI assistant, tutorial or classmate helped with `BANKERS_ALGO-GROUP-8.py` or anything else, add a row above. Follow your instructor's policy on AI use.
-
-Statement: all members have read the code and documents in this repository and can explain them during the oral defense.
